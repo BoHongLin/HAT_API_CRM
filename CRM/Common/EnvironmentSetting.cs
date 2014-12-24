@@ -86,7 +86,6 @@ namespace CRM.Common
                 errorMsg += "自動建立預設檔案完成，請進入資料夾內修改參數。\n";
                 errorMsg += "檔案位置 : " + path + "\n";
                 Console.WriteLine(errorMsg);
-                Console.ReadLine();
                 errorType = ErrorType.INI;
             }
             else
@@ -108,7 +107,6 @@ namespace CRM.Common
                     errorMsg = "設定檔讀取失敗\n";
                     errorMsg += ex.Message + "\n";
                     Console.WriteLine(errorMsg);
-                    Console.ReadLine();
                     errorType = ErrorType.INI;
                 }
             }
@@ -131,7 +129,6 @@ namespace CRM.Common
                 errorMsg = "CRM連線失敗\n";
                 errorMsg += ex.Message + "\n";
                 Console.WriteLine(errorMsg);
-                Console.ReadLine();
                 errorType =  ErrorType.CRM;
             }
         }
@@ -147,7 +144,6 @@ namespace CRM.Common
                 errorMsg = "ERP連線失敗\n";
                 errorMsg += ex.Message + "\n";
                 Console.WriteLine(errorMsg);
-                Console.ReadLine();
                 errorType = ErrorType.DB;
             }
         }
@@ -162,7 +158,6 @@ namespace CRM.Common
                 errorMsg = "ERP資料讀取失敗\n";
                 errorMsg += ex.Message + "\n";
                 Console.WriteLine(errorMsg);
-                Console.ReadLine();
                 errorType =  ErrorType.DB;
             }
         }
