@@ -19,6 +19,7 @@ namespace CRM.Common
         [DllImport("kernel32")]
         private static extern int GetPrivateProfileString(string section, string key, string def, StringBuilder retVal, int size, string filePath);
 
+        #region
         private static String errorMsg = "";
         private static ErrorType errorType = ErrorType.None;
         private static StringBuilder DB_SERVER = new StringBuilder(255);  //回傳所要接收的值
@@ -32,6 +33,7 @@ namespace CRM.Common
         private static OrganizationServiceContext xrm;
         private static SqlDataReader reader;
         private static SqlConnection con;
+        #endregion
 
         #region
         public static IOrganizationService Service
@@ -69,7 +71,6 @@ namespace CRM.Common
                 LoadCRM();
             }
         }
-
         private static void LoadINI()
         {
             string path = Environment.CurrentDirectory + "\\setting.ini";
@@ -111,7 +112,6 @@ namespace CRM.Common
                 }
             }
         }
-
         private static void LoadCRM()
         {
             try

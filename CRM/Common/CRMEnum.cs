@@ -22,7 +22,7 @@ namespace CRM.Common
         None = 0,
         Fail = 100000000,
         Success = 100000001,
-        Incomplete = 100000002
+        Partially = 100000002
     }
     /***** Allen syncDetail 2014/12/24 end *****/
 

@@ -12,7 +12,6 @@ namespace CRM.Model
     public class DataSyncModel
     {
         private Guid datasyncID;
-
         public void CreateDataSyncForCRM(String str)
         {
             try
@@ -33,18 +32,16 @@ namespace CRM.Model
                 EnvironmentSetting.ErrorType = ErrorType.DATASYNC;
             }
         }
-
-        public void UpdateDataSyncForCRM(int succss, int fail)
+        public void UpdateDataSyncForCRM(int succss, int fail, int partially)
         {
             try
             {
                 Entity datasync = new Entity("datasync_datasync");
-                //ColumnSet attributes = new ColumnSet(new string[] { "datasync_name", "ownerid" });
-                //datasync = service.Retrieve("datasync_datasync", datasyncID, attributes);
                 datasync["datasync_datasyncid"] = datasyncID;
                 datasync["datasync_end"] = DateTime.Now;
                 datasync["datasync_success"] = new Decimal(succss);
                 datasync["datasync_fail"] = new Decimal(fail);
+                datasync["datasync_partially"] = new Decimal(partially);
                 EnvironmentSetting.Service.Update(datasync);
                 EnvironmentSetting.ErrorType = ErrorType.None;
             }
@@ -57,7 +54,6 @@ namespace CRM.Model
                 EnvironmentSetting.ErrorType = ErrorType.DATASYNC;
             }
         }
-
         public void UpdateDataSyncWithErrorForCRM(String msg)
         {
             try
@@ -78,7 +74,6 @@ namespace CRM.Model
                 EnvironmentSetting.ErrorType = ErrorType.DATASYNC;
             }
         }
-
         public void CreateDataSyncDetailForCRM(String primarykey,String name, TransactionType transactiontype, TransactionStatus transactionstatus)
         {
             try
