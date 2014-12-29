@@ -92,5 +92,58 @@ namespace CRM.Common
                 return Guid.Empty;
             }
         }
+        public static Guid RetrieveEntityGuid(String linkEntityName, String linkValue, String linkFieldName, String EntityName, String value, String fieldName, String relationshipFieldName)
+        {
+            try
+            {
+                ConditionExpression condition1 = new ConditionExpression();
+                condition1.AttributeName = fieldName;
+                condition1.Operator = ConditionOperator.Equal;
+                condition1.Values.Add(value);
+
+                FilterExpression filter1 = new FilterExpression();
+                filter1.Conditions.Add(condition1);
+
+                ConditionExpression condition2 = new ConditionExpression();
+                condition2.AttributeName = linkFieldName;
+                condition2.Operator = ConditionOperator.Equal;
+                condition2.Values.Add(linkValue);
+
+                FilterExpression filter2 = new FilterExpression();
+                filter2.Conditions.Add(condition2);
+
+                LinkEntity linkEntity1 = new LinkEntity();
+                linkEntity1.LinkFromEntityName = EntityName; // <--- prlot entity name
+                linkEntity1.LinkFromAttributeName = relationshipFieldName;// <-- 商品代號欄位名稱
+                linkEntity1.LinkToEntityName = linkEntityName;
+                linkEntity1.LinkToAttributeName = linkEntityName + "id";
+                linkEntity1.LinkCriteria.AddFilter(filter2);
+
+                //EntityLogicalName
+                QueryExpression qe = new QueryExpression(EntityName); // <--- prlot entity name
+                qe.LinkEntities.Add(linkEntity1);
+                qe.Criteria.AddFilter(filter1);
+
+                EntityCollection collections = EnvironmentSetting.Service.RetrieveMultiple(qe);
+
+                if (collections.Entities.Count > 0)
+                {
+                    Entity entity = collections.Entities.First();
+                    //EntityID
+                    return new Guid(entity[EntityName + "id"].ToString());
+                }
+                else
+                    return Guid.Empty;
+            }
+            catch (Exception ex)
+            {
+                EnvironmentSetting.ErrorMsg = "撈取資料失敗\n";
+                EnvironmentSetting.ErrorMsg += ex.Message + "\n";
+                EnvironmentSetting.ErrorMsg += ex.Source + "\n";
+                EnvironmentSetting.ErrorMsg += ex.StackTrace + "\n";
+                EnvironmentSetting.ErrorType = ErrorType.DATASYNCDETAIL;
+                return Guid.Empty;
+            }
+        }
     }
 }
