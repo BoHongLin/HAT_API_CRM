@@ -97,6 +97,5 @@ namespace CRM.Model
                 EnvironmentSetting.ErrorType = ErrorType.DATASYNCDETAIL;
             }
         }
-
     }
 }

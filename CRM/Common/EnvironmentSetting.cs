@@ -29,6 +29,8 @@ namespace CRM.Common
         private static StringBuilder CRM_DOMAIN = new StringBuilder(255);
         private static StringBuilder CRM_USERNAME = new StringBuilder(255);
         private static StringBuilder CRM_PASSWORD = new StringBuilder(255);
+        private static StringBuilder CRM_UOMSCHEDULE = new StringBuilder(255);
+        private static StringBuilder CRM_UOM = new StringBuilder(255);
         private static IOrganizationService service;
         private static OrganizationServiceContext xrm;
         private static SqlDataReader reader;
@@ -61,6 +63,16 @@ namespace CRM.Common
             get { return errorType; }
             set { errorType = value; }
         }
+        public static StringBuilder UomScheduleName
+        {
+            get { return CRM_UOMSCHEDULE; }
+            set { CRM_UOMSCHEDULE = value; }
+        }
+        public static StringBuilder Uom
+        {
+            get { return CRM_UOM; }
+            set { CRM_UOM = value; }
+        }
         #endregion
 
         public static void LoadSetting()
@@ -83,6 +95,8 @@ namespace CRM.Common
                 WritePrivateProfileString("CRM_INFO", "DOMAIN", "domain", path);
                 WritePrivateProfileString("CRM_INFO", "USERNAME", "username", path);
                 WritePrivateProfileString("CRM_INFO", "PASSWORD", "password", path);
+                WritePrivateProfileString("CRM_INFO", "UOMSCHEDULE", "name", path);
+                WritePrivateProfileString("CRM_INFO", "UOM", "name", path);
                 errorMsg = "設定檔遺失...\n";
                 errorMsg += "自動建立預設檔案完成，請進入資料夾內修改參數。\n";
                 errorMsg += "檔案位置 : " + path + "\n";
@@ -101,6 +115,8 @@ namespace CRM.Common
                     GetPrivateProfileString("CRM_INFO", "DOMAIN", "null", CRM_DOMAIN, 255, path);
                     GetPrivateProfileString("CRM_INFO", "USERNAME", "null", CRM_USERNAME, 255, path);
                     GetPrivateProfileString("CRM_INFO", "PASSWORD", "null", CRM_PASSWORD, 255, path);
+                    GetPrivateProfileString("CRM_INFO", "UOMSCHEDULE", "null", CRM_UOMSCHEDULE, 255, path);
+                    GetPrivateProfileString("CRM_INFO", "UOM", "null", CRM_UOM, 255, path);
                     errorType = ErrorType.None;
                 }
                 catch (Exception ex)
