@@ -38,7 +38,7 @@ namespace CRM.Common
         #endregion
 
         #region
-        public static StringBuilder USERNAME
+        public static StringBuilder UserName
         {
             get { return CRM_USERNAME; }
             set { CRM_USERNAME = value; }
