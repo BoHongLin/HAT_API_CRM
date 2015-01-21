@@ -38,6 +38,11 @@ namespace CRM.Common
         #endregion
 
         #region
+        public static StringBuilder USERNAME
+        {
+            get { return CRM_USERNAME; }
+            set { CRM_USERNAME = value; }
+        }
         public static IOrganizationService Service
         {
             get { return service; }
